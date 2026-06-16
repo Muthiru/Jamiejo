@@ -281,7 +281,7 @@ function App() {
           <div className="section-wrap">
             <div className="section-head reveal">
               <div>
-                <p className="section-label">Simple workflow</p>
+                <p className="section-label">Workflow</p>
                 <h2 className="section-title">From first file to finished work.</h2>
               </div>
               <p className="section-text">
