@@ -23,6 +23,12 @@ import {
 } from 'lucide-react';
 import './styles.css';
 
+// Helper to navigate to section without updating URL
+const scrollToSection = (id) => {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+};
+
 const navItems = [
   ['Services', 'services'],
   ['Workflow', 'workflow'],
@@ -150,20 +156,33 @@ function Header() {
   return (
     <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
       <div className="section-wrap header-row">
-        <a className="brand-mark" href="home" aria-label="Jamiejo Enterprises home">
+        <button type="button"
+          className="brand-mark"
+          onClick={(e) => {
+            e.preventDefault();
+            globalThis.history.pushState({}, '', '/');
+            scrollToSection('home');
+          }}
+          aria-label="Jamiejo Enterprises "
+        >
           <img src="/favicon.png" alt="" aria-hidden="true" />
-          <strong>Jamiejo Enterprises</strong>
-        </a>
+          <strong>Jamiejo Enterprise</strong>
+        </button>
         <nav aria-label="Primary navigation">
           {navItems.map(([label, href]) => (
-            <a key={label} href={href}>
-              {label}
-            </a>
+            <a key={label} href="#" onClick={(e) => {e.preventDefault(); window.history.pushState({}, '', '/' + href); scrollToSection(href);}}>{label}</a>
           ))}
         </nav>
-        <a className="site-btn site-btn-primary header-cta" href="#contact">
+        <button type="button"
+          className="site-btn site-btn-primary header-cta"
+          onClick={(e) => {
+            e.preventDefault();
+            globalThis.history.pushState({}, '', '/contact');
+            scrollToSection('contact');
+          }}
+        >
           Request Quote
-        </a>
+        </button>
       </div>
     </header>
   );
@@ -193,6 +212,12 @@ function ServiceCard({ service, index }) {
 
 function App() {
   useReveal();
+  // Scroll to section based on URL path when mounting
+  useEffect(() => {
+    const path = window.location.pathname;
+    const id = path === '/' ? 'home' : path.replace(/\//g, '');
+    if (id) scrollToSection(id);
+  }, []);
 
   const handleInquirySubmit = (event) => {
     event.preventDefault();
@@ -219,7 +244,7 @@ function App() {
       <Header />
 
       <main>
-        <section id="Home" className="hero-section">
+        <section id="home" className="hero-section">
           <div className="section-wrap hero-grid">
             <div className="hero-copy reveal reveal-left">
               <p className="section-label">All printing and cyber services under one roof</p>
@@ -229,10 +254,10 @@ function App() {
                 service jobs.
               </p>
               <div className="hero-actions">
-                <a className="site-btn site-btn-primary" href="#contact">
+                <a className="site-btn site-btn-primary" href="/contact">
                   Start a Job <ArrowRight size={16} aria-hidden="true" />
                 </a>
-                <a className="site-btn site-btn-soft" href="#services">
+                <a className="site-btn site-btn-soft" href="/services">
                   Explore Services
                 </a>
               </div>
@@ -313,7 +338,7 @@ function App() {
                 <h2>Need print work prepared today?</h2>
                 <p>Send the details and we will confirm what is possible.</p>
               </div>
-              <a className="partner-band-btn" href="#contact">
+              <a className="partner-band-btn" href="/contact">
                 Book a Call <ArrowRight size={17} aria-hidden="true" />
               </a>
             </div>
@@ -331,8 +356,10 @@ function App() {
                 {whyReasons.map((item) => (
                   <article className="why-choose-card" key={item}>
                     <BadgeCheck className="why-choose-icon" size={34} aria-hidden="true" />
-                    <strong>{item.split(' ')[0]}</strong>
-                    <p>{item}</p>
+                    <span>
+                      <strong>{item.split(' ')[0]}</strong><br />
+                      {item.substring(item.indexOf(' ') + 1)}
+                    </span>
                   </article>
                 ))}
               </div>
@@ -373,7 +400,7 @@ function App() {
                       target={item.external ? '_blank' : undefined}
                     >
                       {content}
-                    </a>
+</a>
                   );
                 })}
               </div>
@@ -400,7 +427,7 @@ function App() {
               </label>
               <button type="submit" className="site-btn signup-submit">
                 Submit Request <ArrowRight size={16} aria-hidden="true" />
-              </button>
+</button>
             </form>
           </div>
         </section>
@@ -416,7 +443,7 @@ function App() {
             <p className="footer-heading">Navigation</p>
             <div className="footer-links">
               {navItems.map(([label, href]) => (
-                <a href={href} key={label}>
+                <a href={`/${href}`} key={label}>
                   {label}
                 </a>
               ))}
