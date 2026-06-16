@@ -109,15 +109,14 @@ button {
   min-width: 0;
 }
 
-.brand-mark span {
-  display: grid;
-  place-items: center;
+.brand-mark img {
+  display: block;
   width: 42px;
   height: 42px;
   border-radius: 14px;
-  color: var(--navy);
   background: var(--silver);
-  font-weight: 800;
+  object-fit: contain;
+  padding: 0.25rem;
   box-shadow: 0 14px 28px rgba(15, 23, 42, 0.12);
 }
 

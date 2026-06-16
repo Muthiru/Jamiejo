@@ -24,10 +24,10 @@ import {
 import './styles.css';
 
 const navItems = [
-  ['Services', '#services'],
-  ['Workflow', '#workflow'],
-  ['Why Us', '#why-us'],
-  ['Contact', '#contact'],
+  ['Services', 'services'],
+  ['Workflow', 'workflow'],
+  ['Why Us', 'why-us'],
+  ['Contact', 'contact'],
 ];
 
 const contactInfo = {
@@ -150,8 +150,8 @@ function Header() {
   return (
     <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
       <div className="section-wrap header-row">
-        <a className="brand-mark" href="#top" aria-label="Jamiejo Enterprises home">
-          <span>J</span>
+        <a className="brand-mark" href="home" aria-label="Jamiejo Enterprises home">
+          <img src="/favicon.png" alt="" aria-hidden="true" />
           <strong>Jamiejo Enterprises</strong>
         </a>
         <nav aria-label="Primary navigation">
@@ -219,7 +219,7 @@ function App() {
       <Header />
 
       <main>
-        <section id="top" className="hero-section">
+        <section id="Home" className="hero-section">
           <div className="section-wrap hero-grid">
             <div className="hero-copy reveal reveal-left">
               <p className="section-label">All printing and cyber services under one roof</p>
