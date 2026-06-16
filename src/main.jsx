@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import { Analytics } from '@vercel/analytics/react';
 import {
   ArrowRight,
   BadgeCheck,
@@ -33,7 +34,7 @@ const contactInfo = {
   phone: '+254 702 325743',
   phoneHref: 'tel:+254702325743',
   email: 'komushii97@gmail.com',
-  address: 'Watersys Annex, Tabman Road, Nairobi',
+  address: 'Watersys Annex, Tubman Road, Nairobi',
   whatsappNumber: '254702325743',
 };
 
@@ -449,6 +450,7 @@ function App() {
         <MessageCircle size={26} aria-hidden="true" />
         <span>Need Help?</span>
       </a>
+      <Analytics />
     </div>
   );
 }
